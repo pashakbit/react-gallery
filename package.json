@@ -219,6 +219,7 @@
     "minimist": "1.2.0",
     "react": "15.3.1",
     "react-dom": "15.3.1",
+    "react-dropzone": "^3.7.0",
     "react-helmet": "3.1.0",
     "react-intl": "2.1.5",
     "react-photo-gallery": "^4.2.14",
