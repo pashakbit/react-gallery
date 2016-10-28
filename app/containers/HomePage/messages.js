@@ -6,28 +6,20 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  startProjectHeader: {
-    id: 'boilerplate.containers.HomePage.start_project.header',
-    defaultMessage: 'Start your next react project in seconds',
+  title: {
+    id: 'boilerplate.containers.HomePage.title',
+    defaultMessage: 'Gallery',
   },
-  startProjectMessage: {
-    id: 'boilerplate.containers.HomePage.start_project.message',
-    defaultMessage: 'A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices',
+  metaName: {
+    id: 'boilerplate.containers.HomePage.meta.name',
+    defaultMessage: 'Gallery',
   },
-  trymeHeader: {
-    id: 'boilerplate.containers.HomePage.tryme.header',
-    defaultMessage: 'Try me!',
+  metaContent: {
+    id: 'boilerplate.containers.HomePage.meta.content',
+    defaultMessage: 'Gallery for SailWithMe',
   },
-  trymeMessage: {
-    id: 'boilerplate.containers.HomePage.tryme.message',
-    defaultMessage: 'Show Github repositories by',
-  },
-  trymeAtPrefix: {
-    id: 'boilerplate.containers.HomePage.tryme.atPrefix',
-    defaultMessage: '@',
-  },
-  featuresButton: {
-    id: 'boilerplate.containers.HomePage.features.Button',
-    defaultMessage: 'Features',
+  dragAndDrop: {
+    id: 'boilerplate.containers.HomePage.dragAndDrop',
+    defaultMessage: 'Drag & Drop here',
   },
 });

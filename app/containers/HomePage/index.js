@@ -1,59 +1,59 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import messages from './messages';
 import { createStructuredSelector } from 'reselect';
 
-import { FormattedMessage } from 'react-intl';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Dropzone from 'react-dropzone';
+import Gallery from 'react-photo-gallery';
+
+import messages from './messages';
 
 import styles from './styles.css';
+import camera from './img/camera.svg';
+
 
 export class HomePage extends React.Component {
-  /**
-   * Changes the route
-   *
-   * @param  {string} route The route we want to go to
-   */
   openRoute = (route) => {
     this.props.changeRoute(route);
   };
-
   selectTab = (newIndex, lastIndex) => {
+
+  };
+  onDrop = (files) => {
 
   };
 
   render() {
     return (
-      <article>
+      <article className={styles.gallery}>
         <Helmet
-          title="Gallery"
+          title={messages.title.defaultMessage}
           meta={[
             {
-              name: 'Gallery',
-              content: 'Gallery for SailWithMe'
+              name: messages.metaName.defaultMessage,
+              content: messages.metaContent.defaultMessage
             },
           ]}
         />
-        <Tabs onSelect={this.selectTab} selectedIndex={2}>
+        <Tabs className={styles.tabs} onSelect={this.selectTab} selectedIndex={0}>
           <TabList>
-            <Tab>External (2)</Tab>
-            <Tab>Interios (8)</Tab>
-            <Tab>On Desk (2)</Tab>
+            <Tab className={styles.tabs__item}>All (10)</Tab>
+            <Tab className={styles.tabs__item}>Interios (8)</Tab>
+            <Tab className={styles.tabs__item}>On Desk (2)</Tab>
           </TabList>
 
-          <TabPanel>Group External</TabPanel>
-          <TabPanel>Group Interios</TabPanel>
-          <TabPanel>Group On Desk</TabPanel>
+          <TabPanel className={styles.group}>Group All</TabPanel>
+          <TabPanel className={styles.group}>Group Interios</TabPanel>
+          <TabPanel className={styles.group}>Group On Desk</TabPanel>
         </Tabs>
+
+        <Dropzone className={styles.dropzone} onDrop={this.onDrop} accept='image/*' maxSize={33554432}>
+          <img className={styles.dropzone__camera} src={camera} />
+          <span className={styles.dropzone__message}>{messages.dragAndDrop.defaultMessage}</span>
+        </Dropzone>
       </article>
     );
   }
