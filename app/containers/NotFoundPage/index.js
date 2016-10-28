@@ -10,22 +10,22 @@ import { push } from 'react-router-redux';
 
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
-import Button from 'components/Button';
-import H1 from 'components/H1';
 
 export function NotFound(props) {
   return (
     <article>
-      <H1>
+      <h1>
         <FormattedMessage {...messages.header} />
-      </H1>
-      <Button
-        handleRoute={function redirect() {
-          props.dispatch(push('/'));
-        }}
+      </h1>
+      <button
+        handleRoute={
+          function redirect() {
+            props.dispatch(push('/'));
+          }
+        }
       >
         <FormattedMessage {...messages.homeButton} />
-      </Button>
+      </button>
     </article>
   );
 }
