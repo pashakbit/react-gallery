@@ -1,17 +1,24 @@
-/**
- * Homepage selectors
- */
-
 import { createSelector } from 'reselect';
 
 const selectHome = () => (state) => state.get('home');
 
-const selectUsername = () => createSelector(
+const selectGallery = () => createSelector(
   selectHome(),
-  (homeState) => homeState.get('username')
+  (globalState) => globalState.get('gallery')
+);
+
+const selectLoading = () => createSelector(
+  selectHome(),
+  (globalState) => globalState.get('loading')
+);
+
+const selectError = () => createSelector(
+  selectHome(),
+  (globalState) => globalState.get('error')
 );
 
 export {
-  selectHome,
-  selectUsername,
+  selectGallery,
+  selectLoading,
+  selectError,
 };

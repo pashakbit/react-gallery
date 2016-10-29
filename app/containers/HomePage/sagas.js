@@ -1,55 +1,41 @@
-/**
- * Gets the repositories of the user from Github
- */
-
 import { takeLatest } from 'redux-saga';
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { selectUsername } from 'containers/HomePage/selectors';
 
-/**
- * Github repos request/response handler
- */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(selectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
+import { LOAD_GALLERY } from 'containers/HomePage/constants';
+import { loadGallerySuccess, loadGalleryError } from 'containers/HomePage/actions';
+import { selectGallery } from 'containers/HomePage/selectors';
 
-  // Call our request helper (see 'utils/request')
-  const repos = yield call(request, requestURL);
 
-  if (!repos.err) {
-    yield put(reposLoaded(repos.data, username));
+export function* getGallery() {
+  // const requestURL = 'https://our_server.for/data/with/gallery';
+  // const response = yield call(request, requestURL);
+
+  const response = {};
+  response.gallery = yield select(selectGallery());
+
+  if (!response.err) {
+    yield put(loadGallerySuccess(response.gallery));
   } else {
-    yield put(repoLoadingError(repos.err));
+    yield put(loadGalleryError(response.err));
   }
 }
 
-/**
- * Watches for LOAD_REPOS actions and calls getRepos when one comes in.
- * By using `takeLatest` only the result of the latest API call is applied.
- */
-export function* getReposWatcher() {
-  yield fork(takeLatest, LOAD_REPOS, getRepos);
+export function* getGalleryWatcher() {
+  yield fork(takeLatest, LOAD_GALLERY, getGallery);
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
-export function* githubData() {
+export function* galleryData() {
   // Fork watcher so we can continue execution
-  const watcher = yield fork(getReposWatcher);
+  const watcher = yield fork(getGalleryWatcher);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
-// Bootstrap sagas
 export default [
-  githubData,
+  galleryData,
 ];
