@@ -31,6 +31,10 @@ const addDevMiddlewares = (app, webpackConfig) => {
     });
   }
 
+  app.get(/img\/*\.*/, (req, res) => {
+    res.sendFile(path.join(process.cwd(), '/app', req.path));
+  });
+
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
       if (err) {
