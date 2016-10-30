@@ -8,11 +8,7 @@ import LocaleToggle from 'containers/LocaleToggle';
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <section>
-        <p>
-          <FormattedMessage {...messages.licenseMessage} />
-        </p>
-      </section>
+      <FormattedMessage {...messages.licenseMessage} />
     </footer>
   );
 }
