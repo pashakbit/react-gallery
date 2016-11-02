@@ -268,9 +268,14 @@ function homeReducer(state = initialState, action) {
             photosAll = state.getIn(['gallery', 'groups', groupAllIndex, 'photos']),
             photoAllIndex = photosAll.findIndex((photo) => photo.get('src') === action.src);
 
-        return state
-          .setIn(['gallery', 'groups', groupIndex, 'photos'], photos.delete(photoIndex))
-          .setIn(['gallery', 'groups', groupAllIndex, 'photos'], photosAll.delete(photoAllIndex));
+        if (photoAllIndex !== -1) {
+          return state
+            .setIn(['gallery', 'groups', groupIndex, 'photos'], photos.delete(photoIndex))
+            .setIn(['gallery', 'groups', groupAllIndex, 'photos'], photosAll.delete(photoAllIndex));
+        } else {
+          return state
+            .setIn(['gallery', 'groups', groupIndex, 'photos'], photos.delete(photoIndex));
+        }
       } else {
         return state
           .setIn(['gallery', 'groups', groupIndex, 'photos'], photos.delete(photoIndex));
